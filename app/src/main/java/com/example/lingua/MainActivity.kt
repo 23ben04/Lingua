@@ -36,7 +36,7 @@ import com.example.lingua.ui.theme.White
 
 
 @Composable
-fun LanguageLevel(text: String, modifier: Modifier = Modifier) {
+fun LanguageLevel(text: String) {
 
     val levels = listOf("A1", "A2", "B1", "B2")
     val texts = listOf("Beginner", "Elementary", "Intermediate", "Advanced")
