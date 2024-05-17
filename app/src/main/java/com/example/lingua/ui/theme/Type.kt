@@ -11,7 +11,8 @@ import com.example.lingua.R
 // Set of Material typography styles to start with
 val SpaceGrotesk = FontFamily(
     Font(R.font.relay_space_grotesk_regular),
-    Font(R.font.relay_space_grotesk_bold, FontWeight.Bold)
+    Font(R.font.relay_space_grotesk_bold, FontWeight.Bold),
+    Font(R.font.relay_space_grotesk_medium, FontWeight.Medium)
 )
 
 val Typography = Typography(
