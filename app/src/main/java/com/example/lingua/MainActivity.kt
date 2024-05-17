@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,10 @@ import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -40,7 +45,7 @@ fun LanguageLevel(text: String) {
 
     val levels = listOf("A1", "A2", "B1", "B2")
     val texts = listOf("Beginner", "Elementary", "Intermediate", "Advanced")
-    var selectedIndex = 0
+    var selectedIndex by remember { mutableIntStateOf(-1) }
 
     Text(
         text = text,
@@ -54,30 +59,39 @@ fun LanguageLevel(text: String) {
         )
     )
 
-    Column(modifier = Modifier.padding(top = 130.dp,start = 40.dp)) {
-        repeat(4) {
+    Column(modifier = Modifier.padding(top = 130.dp, start = 40.dp)) {
+        repeat(4) { index ->
             Box(
                 modifier = Modifier
                     .size(width = 305.dp, height = 60.dp)
+                    .border(width = 5.dp, color = Green, shape = RoundedCornerShape(15.dp))
                     .background(color = LightBlue, shape = RoundedCornerShape(15.dp))
-            ){
-                Text(text = levels[it],
+            ) {
+                Text(
+                    text = levels[index],
                     color = White,
                     fontSize = 22.sp,
-                    modifier = Modifier.padding(start = 20.dp, top = 15.dp))
+                    modifier = Modifier.padding(start = 20.dp, top = 15.dp)
+                )
 
-                    Spacer(modifier = Modifier.width(10.dp))
+                Spacer(modifier = Modifier.width(10.dp))
 
-                    Text(text = texts[it],
+                Text(
+                    text = texts[index],
                     fontSize = 22.sp,
                     color = White,
-                    modifier = Modifier.padding(start = 75.dp, top = 15.dp))
+                    modifier = Modifier.padding(start = 75.dp, top = 15.dp)
+                )
 
                 RadioButton(
-                            modifier = Modifier.padding(start = 250.dp,top = 5.dp),
-                            selected = (selectedIndex == it),
-                            onClick = { selectedIndex = it},
-                            colors = RadioButtonDefaults.colors(unselectedColor = DarkGreen,selectedColor = DarkGreen))
+                    modifier = Modifier.padding(start = 250.dp, top = 5.dp),
+                    selected = (selectedIndex == index),
+                    onClick = { selectedIndex = index },
+                    colors = RadioButtonDefaults.colors(
+                        unselectedColor = DarkGreen,
+                        selectedColor = DarkGreen
+                    )
+                )
             }
             Spacer(modifier = Modifier.height(70.dp))
         }
@@ -86,11 +100,14 @@ fun LanguageLevel(text: String) {
 
     Row(modifier = Modifier.padding(top = 675.dp, start = 35.dp))
     {
-        Button(onClick = { /* Button click action */ },
+        Button(
+            onClick = { /* Button click action */ },
             modifier = Modifier.size(width = 310.dp, height = 50.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Green))
+            colors = ButtonDefaults.buttonColors(containerColor = Green)
+        )
         {
-            Text(text = "Save",
+            Text(
+                text = "Save",
                 style = TextStyle(
                     fontSize = 18.sp,
                     fontFamily = SpaceGrotesk,
@@ -105,7 +122,7 @@ fun LanguageLevel(text: String) {
 
 
 class MainActivity : ComponentActivity() {
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
